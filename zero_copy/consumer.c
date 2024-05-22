@@ -3,16 +3,18 @@
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <string.h>
+#include <stdbool.h>
+#include <errno.h>
 
-#define FILEPATH "shared_file"
 #define SIZE 4096
+#define SHM_NAME "/my_shm"
 
 int main() {
-    sleep(1); // Wait for producer to finish writing
+    int fd = shm_open(SHM_NAME, O_RDWR, 0666);
 
-    int fd = open(FILEPATH, O_RDONLY);
     if (fd == -1) {
-        perror("open");
+        perror("shm_open");
         return 1;
     }
 

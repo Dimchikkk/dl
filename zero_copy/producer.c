@@ -5,19 +5,15 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 
-#define FILEPATH "shared_file"
 #define SIZE 4096
+#define SHM_NAME "/my_shm"
 
 int main() {
-    int fd = open(FILEPATH, O_RDWR | O_CREAT | O_TRUNC, 0666);
+    int fd = shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666);
     if (fd == -1) {
-        perror("open");
-        return 1;
-    }
-
-    if (ftruncate(fd, SIZE) == -1) {
-        perror("ftruncate");
+        perror("shm_open");
         return 1;
     }
 
@@ -33,11 +29,16 @@ int main() {
         const char *message = "Hello, zero-copy world!";
         strcpy(map, message);
         printf("Producer wrote: %s\n", message);
-        sleep(10000000); // Delay for demonstration purposes
+        sleep(100000); // Delay for demonstration purposes
     }
 
     if (munmap(map, SIZE) == -1) {
         perror("munmap");
+        return 1;
+    }
+
+    if (shm_unlink(SHM_NAME) == -1) {
+        perror("shm_unlink");
         return 1;
     }
 
