@@ -21,7 +21,7 @@ Copy instructions to `exec_heap.c` and then:
 1. `gcc -o exec_heap exec_heap.c`
 2. `./exec_heap`
 
-## Zero-copy between processes using mmap
+## Playing with zero-copy between processes
 
 1. `gcc -o producer producer.c`
 2. `gcc -o consumer consumer.c`
