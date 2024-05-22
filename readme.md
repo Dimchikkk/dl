@@ -11,7 +11,7 @@
 
 ## Playing with executable code on heap
 
-To obtain proper asm for your machine:
+To obtain proper machine code: 
 
 1. `as -o return_42.o return_42.s`
 2. `objdump -d return_42.o`
