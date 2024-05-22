@@ -15,10 +15,10 @@ void load_and_call_greet() {
     }
 
     // Define a function pointer for the function we want to call
-    char *(*greet)(void);
+    struct hello*(*greet)(void);
 
     // Get the function from the shared library
-    greet = (char *(*)(void)) dlsym(dynamic_lib, "greet");
+    greet = (struct hello *(*)(void)) dlsym(dynamic_lib, "greet");
 
     // Check for errors
     char *error;
