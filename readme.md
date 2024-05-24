@@ -23,7 +23,7 @@ Copy instructions to `exec_heap.c` and then:
 3. `./producer`
 4. `./consumer`
 
-### Playing with arena allocator
+## Playing with arena allocator
 
 1. `gcc -o malloc_bug malloc_bug.c -fsanitize=address`
 2. Check that `./malloc_bug` produces "SUMMARY: AddressSanitizer: heap-use-after-free (malloc_bug:arm64+0x100003b0c) in main+0xd0" error
